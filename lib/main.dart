@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Counter Cubit',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,8 +30,10 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        primarySwatch: Colors.blue
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: const MyHomePage(title: 'Flutter Bloc Home Page'),
     );
   }
 }
@@ -106,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Count',
             ),
             Text(
               '$_counter',
@@ -115,11 +117,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'decrement',
+            heroTag: 'decrement',
+            child: const Icon(Icons.remove)
+          ),
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'increment',
+            heroTag: 'increment',
+            child: const Icon(Icons.add),
+          )
+        ],
+      ) // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
