@@ -108,11 +108,11 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              '${BlocProvider.of<CounterCubit>(context).state.counter}',
+            const Text(
+              'Counter',
             ),
             Text(
-              '$_counter',
+              '${BlocProvider.of<CounterCubit>(context).state.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
