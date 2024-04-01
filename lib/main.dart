@@ -99,6 +99,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 } 
               );
+            } else if (state.counter == -1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const OtherPage();
+                  }
+                )
+              );
             }
 
             return Center(
