@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({super.key,});
@@ -24,20 +25,25 @@ class OtherPage extends StatelessWidget {
           ],
         )
       ),
-      floatingActionButton: const Row(
+      floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: onPressed,
+            onPressed: () {
+              
+            },
             tooltip: 'increment',
             heroTag: 'increment',    
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
+          const SizedBox(width: 10),
           FloatingActionButton(
-            onPressed: onPressed,
+            onPressed: () {
+              
+            },
             tooltip: 'decrement',
             heroTag: 'decrement',    
-            child: Icon(Icons.remove),
+            child: const Icon(Icons.remove),
           ),
         ],
       ),
