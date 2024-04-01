@@ -179,6 +179,9 @@ provides
   You can use the following extension function to get same functionallity
 
     context.watch<T>() // where T is a cubit
+  
+  If you want to get better performance you wrap this function around a Builder widget and that way only the content
+  of the widget builder parameter will get rebuilt when state changes
 
   3.- This extension function can be use in the same way as the second option, however you would
   specifically say the only property you want to listen
@@ -200,6 +203,7 @@ provides
   and also listen to state changes
 
   2.- BlocBuilder<Cubit, State>(Builder builder)
+  This function could be interchanged with context.watch function
   This function most important parameter is builder which lets us return a widget in which we can consume 
   a context and a state, we can listen state properties and the UI will update when they change, we should
   not add any UI logic that will cause events to trigger like displaying a dialog just purely a UI listening to properties
