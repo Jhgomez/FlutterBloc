@@ -33,14 +33,18 @@ class OtherPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<CounterBloc>(context).add(IncrementCounterEvent());
+              },
               tooltip: 'increment',
               heroTag: 'increment',
               child: const Icon(Icons.add),
             ),
             const SizedBox(width: 10),
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<CounterBloc>().add(DecrementCounterEvent());
+              },
               tooltip: 'decrement',
               heroTag: 'decrement',
               child: const Icon(Icons.remove),
