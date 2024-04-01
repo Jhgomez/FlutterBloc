@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'Counter',
             ),
             Text(
-              '${BlocProvider.of<CounterCubit>(context).state.counter}',
+              '${BlocProvider.of<CounterCubit>(context, listen: true).state.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
