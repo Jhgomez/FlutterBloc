@@ -20,7 +20,7 @@ class OtherPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Other counter',
+              '${context.watch<CounterBloc>().state.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
