@@ -202,6 +202,10 @@ provides
   as explained above this fuction lets us consume the funtions in a cubit to modify state
   and also listen to state changes
 
+   1.1- BlockProvider<T>(T create, Widget child)
+   This signature will let us do some "dependency injection" meaning that we create the instance of bloc or cubit
+   by wrapping the childs with this signature, this will let us use the static function mentioned above
+
   2.- BlocBuilder<Cubit, State>(Builder builder)
   This function could be interchanged with context.watch function
   This function most important parameter is builder which lets us return a widget in which we can consume 
