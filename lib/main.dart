@@ -63,7 +63,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
-    BlocProvider.of<CounterCubit>(context).increment();
+    context.read<CounterCubit>().increment();
   }
 
   void _decrementCounter() {
