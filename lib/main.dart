@@ -190,3 +190,26 @@ provides
     Final name = context.select((Cubit cubit) => cubit.someNameProperty); // and then pass this to a Text and it will rebuild when this changes
 
 */
+
+/*
+  In order to access state you have different options and they will depend on what you want to achieve
+  in the following code T is a cubit
+
+  1.- BlocProvider.of<T>(context)
+  as explained above this fuction lets us consume the funtions in a cubit to modify state
+  and also listen to state changes
+
+  2.- BlocBuilder<Cubit, State>(Builder builder)
+  This function most important parameter is builder which lets us return a widget in which we can consume 
+  a context and a state, we can listen state properties and the UI will update when they change, we should
+  not add any UI logic that will cause events to trigger like displaying a dialog just purely a UI listening to properties
+
+  3.- BlocListener<Cubit, State>(Listener listener, Widget child)
+  This is useful when we need to add logic to launch or display UI when events that depend on state happens
+  like displaying a dialog, we could nest a bloc builder inside the child parameter so we could update/rebuild a screen when 
+  state changes but also at the same time enable state changes trigger events at the same time but for this we will see
+  another function in the next section, but this would be useful if our screen is not updating due to state changes
+
+  4.- BlocConsumer<Cubit, State>(Listener listener, Builder builder)
+  Here as you can see you can have a listener and a builder
+*/
