@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
         ),
-        body: BlocListener<CounterCubit, CounterState>(
+        body: BlocConsumer<CounterCubit, CounterState>(
           listener: (context, state) {        
               if (state.counter == 3) {
                 showDialog(
@@ -104,8 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }));
               }
           },
-          child: BlocBuilder<CounterCubit, CounterState>(
-            builder: (context, state) {
+          builder: (context, state) {
               return Center(
                 // Center is a layout widget. It takes a single child and positions it
                 // in the middle of the parent.
@@ -137,7 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
-        ),
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
