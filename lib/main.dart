@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
+import 'package:flutter_bloc_app/other_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -89,6 +90,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: BlocBuilder<CounterCubit, CounterState>(
           builder: (context, state) {
+            if (state.counter == 3) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: Text('counter is ${state.counter}'),
+                  );
+                } 
+              );
+            }
+
             return Center(
               // Center is a layout widget. It takes a single child and positions it
               // in the middle of the parent.
