@@ -67,6 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
     BlocProvider.of<CounterCubit>(context).increment();
   }
 
+  void _decrementCounter() {
+    BlocProvider.of<CounterCubit>(context).decrement();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -118,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: _incrementCounter,
+            onPressed: _decrementCounter,
             tooltip: 'decrement',
             heroTag: 'decrement',
             child: const Icon(Icons.remove)
