@@ -156,3 +156,37 @@ class _MyHomePageState extends State<MyHomePage> {
         );
   }
 }
+
+/*
+there is now some BuilderContext extension functions that you can use to listen to changes
+and we will compare them with the functionallity that BlocProvider.of static function
+provides
+
+  1. Block provider lets us access the functions of our cubit and/or get the value of the
+  current state properties
+
+    BlocProvide.of<T>(context) // where T is a cubit
+
+  You can use the following extension function to just read the current value
+
+    context.read<T>() // where T is a cubit and then you can just for example read a counter value and pass it to a text
+
+  2.- BlocProvider lets us listen to updates just by specifiycing a parameter, this means
+  all changes in the parameter we are listening will cause the UI to update
+
+    BlocProvider.of<T>(context, listen: true)  //where T is a cubit
+  
+  You can use the following extension function to get same functionallity
+
+    context.watch<T>() // where T is a cubit
+
+  3.- This extension function can be use in the same way as the second option, however you would
+  specifically say the only property you want to listen
+
+    context.select<T, R>( (T t) => R r)
+
+    this means you can do the following
+
+    Final name = context.select((Cubit cubit) => cubit.someNameProperty); // and then pass this to a Text and it will rebuild when this changes
+
+*/
