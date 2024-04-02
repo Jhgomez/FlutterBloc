@@ -1,13 +1,13 @@
 part of 'counter_cubit.dart';
 
-class CounterState extends Equatable {
+class CounterCubitState extends Equatable {
   final int counter;
-  const CounterState({
+  const CounterCubitState({
     required this.counter,
   });
 
-  factory CounterState.initial() {
-    return const CounterState(counter: 0);
+  factory CounterCubitState.initial() {
+    return const CounterCubitState(counter: 0);
   }
   
   @override
@@ -16,10 +16,10 @@ class CounterState extends Equatable {
   @override
   String toString() => 'CounterState(counter $counter)';
 
-  CounterState copyWith({
+  CounterCubitState copyWith({
     int? counter,
   }) {
-    return CounterState(
+    return CounterCubitState(
       counter: counter ?? this.counter,
     );
   }
