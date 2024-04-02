@@ -11,6 +11,7 @@ class OtherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Other'),
       ),
       body: BlocListener<CounterBloc, CounterState>(
