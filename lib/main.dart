@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:flutter_bloc_app/other_page.dart';
 
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
         ),
-        body: BlocConsumer<CounterCubit, CounterState>(
+        body: BlocConsumer<CounterCubit, CounterCubitState>(
           listener: (context, state) {        
               if (state.counter == 3) {
                 showDialog(
@@ -100,8 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     });
               } else if (state.counter == -1) {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const OtherPage();
-                }));
+                  return BlocProvider<CounterBloc>(
+                      create: (context) => CounterBloc(),
+                      child: const OtherPage()
+                      );}));
               }
           },
           builder: (context, state) {
