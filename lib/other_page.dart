@@ -9,13 +9,25 @@ class OtherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterBloc>(
-      create: (context) => CounterBloc(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Other'),
-        ),
-        body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Other'),
+      ),
+      body: BlocListener<CounterBloc, CounterState>(
+        listener: (context, state) {
+          if (state.counter == 3) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Text('counter is ${state.counter}'),
+                      );
+                    });
+              } else if (state.counter == -1) {
+                Navigator.pop(context);
+              }
+        },
+        child: Center(
             child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -29,28 +41,29 @@ class OtherPage extends StatelessWidget {
             ),
           ],
         )),
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              onPressed: () {
-                BlocProvider.of<CounterBloc>(context).add(IncrementCounterEvent());
-              },
-              tooltip: 'increment',
-              heroTag: 'increment',
-              child: const Icon(Icons.add),
-            ),
-            const SizedBox(width: 10),
-            FloatingActionButton(
-              onPressed: () {
-                context.read<CounterBloc>().add(DecrementCounterEvent());
-              },
-              tooltip: 'decrement',
-              heroTag: 'decrement',
-              child: const Icon(Icons.remove),
-            ),
-          ],
-        ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              BlocProvider.of<CounterBloc>(context)
+                  .add(IncrementCounterEvent());
+            },
+            tooltip: 'increment',
+            heroTag: 'increment',
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(width: 10),
+          FloatingActionButton(
+            onPressed: () {
+              context.read<CounterBloc>().add(DecrementCounterEvent());
+            },
+            tooltip: 'decrement',
+            heroTag: 'decrement',
+            child: const Icon(Icons.remove),
+          ),
+        ],
       ),
     );
   }
