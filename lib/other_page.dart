@@ -37,7 +37,7 @@ class OtherPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
              ),
              Text(
-               '${context.watch<CounterBloc>().state.counter}',,
+               '${context.watch<CounterBloc>().state.counter}',
                style: Theme.of(context).textTheme.bodyMedium,
              ),
             ],
