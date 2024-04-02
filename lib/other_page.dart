@@ -28,23 +28,33 @@ class OtherPage extends StatelessWidget {
               }
         },
         child: Center(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              '${context.watch<CounterBloc>().state.counter}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              '0',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-        )),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Counter with bloc',
+                style: Theme.of(context).textTheme.headlineMedium,
+             ),
+             Text(
+               '${context.watch<CounterBloc>().state.counter}',,
+               style: Theme.of(context).textTheme.bodyMedium,
+             ),
+            ],
+          )
+        ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          FloatingActionButton(
+            onPressed: () {
+              context.read<CounterBloc>().add(DecrementCounterEvent());
+            },
+            tooltip: 'decrement',
+            heroTag: 'decrement',
+            child: const Icon(Icons.remove),
+          ),
+          const SizedBox(width: 10),
           FloatingActionButton(
             onPressed: () {
               BlocProvider.of<CounterBloc>(context)
@@ -53,15 +63,6 @@ class OtherPage extends StatelessWidget {
             tooltip: 'increment',
             heroTag: 'increment',
             child: const Icon(Icons.add),
-          ),
-          const SizedBox(width: 10),
-          FloatingActionButton(
-            onPressed: () {
-              context.read<CounterBloc>().add(DecrementCounterEvent());
-            },
-            tooltip: 'decrement',
-            heroTag: 'decrement',
-            child: const Icon(Icons.remove),
           ),
         ],
       ),
