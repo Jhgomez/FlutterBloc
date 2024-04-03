@@ -223,4 +223,25 @@ provides
 
   4.- BlocConsumer<Cubit, State>(Listener listener, Builder builder)
   Here as you can see you can have a listener and a builder
+
+  5.- MultiBlocProvider(
+        providers: [ 
+          BlocProvider<CubitOrBlocA>(create: (context) => CubitOrBlocA()),
+          BlocProvider<CubitOrBlocB>(create: (context) => CubitOrBlocB())
+          ],
+        child: some widget(s)
+        )
+  We can use this function when two cubit or blocs need to interact for example if CubitOrBlocB depends on some
+  state value of CubitOrBlocA, the other option is to wrap the latter inside the former with a blocListener and 
+  monitor state change/values inside the listener parameter callback and call functions if it is a cubit or 
+  add events to stream if it is a bloc
+
+  6.- blocProvider.value(
+    value: context.read<CubitOrBloc>(),
+    child: some widget/new page that consumes the same cubit/bloc as one in the current screen
+  )
+
+  We could use this signature to inject a cubit/bloc in the current screen to another screen when navigating and the
+  next/other screen will consume the same instance of the cubit/bloc. The context used to find the cubit has to be same
+  as the context it was used to create the cubit or a context that has access to it like "pure" child
 */
