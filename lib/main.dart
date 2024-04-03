@@ -246,9 +246,20 @@ provides
   as the context it was used to create the cubit or a context that has access to it like "pure" child
 
   However there are different ways to navigate just using "Navigator.push" which is an anonymous route access, in this
-  scenario you can just use the function above. The next option is using material app route parameter, in this option
-  since we need the same instance of cubit we would need to have a parent widget that would create an instance of the
-  cubit/bloc directly and then in the route just use the fuction above to provide the value however you would need to 
-  wrap the material app containing the routes inside a statefull widget to be able to dispose of the cubit/bloc by
-  overriding function "void dispose()" and calling "cubit.close"
+  scenario you can just use the function above. 
+  
+  The next option is using material app route parameter(Named route access), in this option since we need the same instance of cubit we would 
+  need to have a parent widget that would create an instance of the cubit/bloc directly and then in the route just use the
+  fuction above to provide the value however you would need to wrap the material app containing the routes inside a statefull 
+  widget to be able to dispose of the cubit/bloc by overriding function "void dispose()" and calling "cubit.close"
+
+  when navigating using "Generated route access" basically you need to add a parameter using the same widget "MaterialApp" and 
+  instead of specifying "routes" parameter you specify a parameter called "onGenerateRoute" which provides a call back
+  with "RouteSettings" object you can evaluate the "name" parameter of routesettings and return a "MaterialPageRoute" which
+  will wrap the desired screen inside a ".value" signature (Note this has to follow the same patter as above in which 
+  we dispose of the cubit "manually")
+
+  however you can always just wrap the widgets inside a block provider and that way we could have access to the cubit, for example
+  we can wrap material app inside a blocProvider constructor and then have access to the same cubit instance and then 
+  avoid having to worry about disposing cubit
 */
