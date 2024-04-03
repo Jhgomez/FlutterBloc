@@ -244,4 +244,11 @@ provides
   We could use this signature to inject a cubit/bloc in the current screen to another screen when navigating and the
   next/other screen will consume the same instance of the cubit/bloc. The context used to find the cubit has to be same
   as the context it was used to create the cubit or a context that has access to it like "pure" child
+
+  However there are different ways to navigate just using "Navigator.push" which is an anonymous route access, in this
+  scenario you can just use the function above. The next option is using material app route parameter, in this option
+  since we need the same instance of cubit we would need to have a parent widget that would create an instance of the
+  cubit/bloc directly and then in the route just use the fuction above to provide the value however you would need to 
+  wrap the material app containing the routes inside a statefull widget to be able to dispose of the cubit/bloc by
+  overriding function "void dispose()" and calling "cubit.close"
 */
