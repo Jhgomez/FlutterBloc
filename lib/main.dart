@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
+import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
 
 void main() {
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
 
@@ -262,4 +264,40 @@ provides
   however you can always just wrap the widgets inside a block provider and that way we could have access to the cubit, for example
   we can wrap material app inside a blocProvider constructor and then have access to the same cubit instance and then 
   avoid having to worry about disposing cubit
+*/
+
+/*
+  You can define an bloc Event transformer in 3 different ways
+
+  1.- In event handler inside the bloc class definition, following code is written in the bloc's constructor tipically
+
+    void on<E extendes Event>(
+      EventHandler<E, State> handler,
+      {EvebtTranforme<E>? transformer}
+    )
+  
+  2.- YOu can override/assign all event transfromer of all events in the app, by overriding this the "Bloc.transformer"
+  in the main app function
+
+    void main() {
+      Bloc.transformer = someTransformer<dynamic>();
+    }
+
+  3.- You can specify the transformer you want to apply to each different bloc with a "Zone" approach
+
+    BlocOverrides.runZoned(
+      () {
+        final overrides = BlocOverrides.current;
+
+        BlockOverrides(
+          () {
+            final overrides = BlocOverrides.current;
+          },
+          blocObserver: blocBObserver(),
+          eventTransformer: blocBEventTransformer()
+        );
+      },
+      blocObserver: blocAObserver(),
+      eventTransformer: blocBTransformer()
+    )
 */
