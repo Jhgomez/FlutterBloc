@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   return MultiBlocProvider(
                     providers: [
                       BlocProvider<CounterBloc>(create: (contextRoute) => CounterBloc()),
-                      // BlocProvider<ThemeBloc>(create: (contextRoute) => context.read<ThemeBloc>())
+                      BlocProvider<ThemeBloc>(create: (contextRoute) => context.read<ThemeBloc>())
                     ],
                     child: const OtherPage()
                     );
