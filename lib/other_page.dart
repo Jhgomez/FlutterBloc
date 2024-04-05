@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({
@@ -49,13 +50,22 @@ class OtherPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () {
+              context.read<ThemeBloc>().add(ToggleThemeEvent());
+            },
+            tooltip: 'toggleTheme',
+            heroTag: 'toggleTheme',
+            child: const Icon(Icons.brightness_6),
+          ),
+          const SizedBox(width: 5),
+          FloatingActionButton(
+            onPressed: () {
               context.read<CounterBloc>().add(DecrementCounterEvent());
             },
             tooltip: 'decrement',
             heroTag: 'decrement',
             child: const Icon(Icons.remove),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 5),
           FloatingActionButton(
             onPressed: () {
               BlocProvider.of<CounterBloc>(context)
@@ -64,6 +74,15 @@ class OtherPage extends StatelessWidget {
             tooltip: 'increment',
             heroTag: 'increment',
             child: const Icon(Icons.add),
+          ),
+          const SizedBox(width: 5),
+          FloatingActionButton(
+            onPressed: () {
+              context.read<CounterBloc>().add(DecrementCounterEvent());
+            },
+            tooltip: 'deletePersistedState',
+            heroTag: 'deletePersistedState',
+            child: const Icon(Icons.delete_forever),
           ),
         ],
       ),
