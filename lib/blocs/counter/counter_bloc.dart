@@ -17,6 +17,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> with HydratedMixin {
     // bellow code they run sequentially because they are in the same bucker 
     // on<IncrementCounterEvent>(_incrementCounter);
     // on<DecrementCounterEvent>(_decrementCounter);
+    hydrate();
     on<CounterEvent>( ((event, emit) async {
           switch(event) {
             case IncrementCounterEvent() : await _incrementCounter(event, emit);
