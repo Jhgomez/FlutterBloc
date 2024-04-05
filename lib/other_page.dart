@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({
@@ -68,8 +69,7 @@ class OtherPage extends StatelessWidget {
           const SizedBox(width: 5),
           FloatingActionButton(
             onPressed: () {
-              BlocProvider.of<CounterBloc>(context)
-                  .add(IncrementCounterEvent());
+              BlocProvider.of<CounterBloc>(context).add(IncrementCounterEvent());
             },
             tooltip: 'increment',
             heroTag: 'increment',
@@ -78,7 +78,7 @@ class OtherPage extends StatelessWidget {
           const SizedBox(width: 5),
           FloatingActionButton(
             onPressed: () {
-              context.read<CounterBloc>().add(DecrementCounterEvent());
+              HydratedBloc.storage.clear();
             },
             tooltip: 'deletePersistedState',
             heroTag: 'deletePersistedState',
