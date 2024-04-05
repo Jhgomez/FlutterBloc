@@ -119,13 +119,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     });
               } else if (state.counter == -1) {
                 Navigator.push(context, MaterialPageRoute(builder: (contextRoute) {
-                  return MultiBlocProvider(
-                    providers: [
-                      BlocProvider<CounterBloc>(create: (contextRoute) => CounterBloc()),
-                      BlocProvider<ThemeBloc>(create: (contextRoute) => context.read<ThemeBloc>())
-                    ],
-                    child: const OtherPage()
-                    );
+                  return BlocProvider.value(
+                    value: context.read<ThemeBloc>(),
+                    child: BlocProvider<CounterBloc>(
+                      create: (contextRoute) => CounterBloc(),
+                      child: const OtherPage(),
+                    ),
+                  );
                   }
                 )
               );
