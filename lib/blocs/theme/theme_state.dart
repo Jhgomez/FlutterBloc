@@ -1,9 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 part of 'theme_bloc.dart';
 
-enum ColorTheme{ LIGHT, DARK }
+enum ColorTheme{ 
+  LIGHT, 
+  DARK; 
+
+  String toJson() => name;
+
+  static ColorTheme fromJson(String Json) => values.byName(Json);
+}
 
 class ThemeState extends Equatable {
   final ColorTheme colorTheme;
@@ -31,13 +36,13 @@ class ThemeState extends Equatable {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'colorTheme': colorTheme.toMap(),
+      'colorTheme': colorTheme.toJson(),
     };
   }
 
   factory ThemeState.fromJson(Map<String, dynamic> json) {
     return ThemeState( 
-      colorTheme: ColorTheme()(map['colorTheme'] as Map<String,dynamic>),
+      colorTheme: ColorTheme.fromJson(json['colorTheme'])
     );
   }
 }

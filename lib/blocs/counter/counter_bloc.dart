@@ -1,7 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'counter_event.dart';
