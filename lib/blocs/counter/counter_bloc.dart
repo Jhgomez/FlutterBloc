@@ -38,6 +38,6 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
 
     Future<void> _incrementCounter(event,emit) async {
       await Future.delayed(const Duration(seconds: 4));
-      emit(state.copyWith(counter: state.counter - 1));
+      emit(state.copyWith(counter: state.counter  + 1));
     }
 }
