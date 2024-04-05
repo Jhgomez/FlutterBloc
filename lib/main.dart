@@ -323,3 +323,35 @@ provides
       eventTransformer: blocBTransformer()
     )
 */
+
+/*
+  We have different options to access a repository through our state solution(bloc)
+    1.- 
+    RepositoryProvider(
+      create: (context) => RepositoryA(),
+      child: ChildA()
+    )
+    
+    or
+
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<RepositoryA>(create: (context) => RepositoryA()),
+        RepositoryProvider<RepositoryB>(create: (context) => RepositoryB())
+      ],
+      child: ChildA()
+    )
+
+    These two options will create and then inject the repository into the widget tree
+
+    2.- 
+    context.read<RepositoryA>();
+
+    or
+
+    RepositoryProvider.of<RepositoryA>(context)
+
+    These two options are similar/equivalent to the blocprovider static functions but they
+    are used to retrieve an injected instance of a repository in context(widget tree)
+
+*/
