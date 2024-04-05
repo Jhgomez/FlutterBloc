@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 part of 'counter_cubit.dart';
 
 class CounterCubitState extends Equatable {
@@ -21,6 +23,18 @@ class CounterCubitState extends Equatable {
   }) {
     return CounterCubitState(
       counter: counter ?? this.counter,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'counter': counter,
+    };
+  }
+
+  factory CounterCubitState.fromJson(Map<String, dynamic> json) {
+    return CounterCubitState(
+      counter: json['counter'] as int,
     );
   }
 }
