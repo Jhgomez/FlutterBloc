@@ -25,18 +25,6 @@ class CounterCubitState extends Equatable {
       counter: counter ?? this.counter,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'counter': counter,
-    };
-  }
-
-  factory CounterCubitState.fromJson(Map<String, dynamic> json) {
-    return CounterCubitState(
-      counter: json['counter'] as int,
-    );
-  }
 }
 
 // sealed class CounterState extends Equatable {
