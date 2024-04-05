@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
+import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
@@ -102,12 +103,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     });
               } else if (state.counter == -1) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return BlocProvider<CounterBloc>(
-                      create: (context) => CounterBloc(),
-                      child: const OtherPage()
-                      );}));
-              }
+                Navigator.push(context, MaterialPageRoute(builder: (contextRoute) {
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider<CounterBloc>(create: (contextRoute) => CounterBloc()),
+                      BlocProvider<ThemeBloc>(create: (contextRoute) => ThemeBloc())
+                    ],
+                    child: const OtherPage()
+                    );
+                  }
+                )
+              );
+            }
           },
           builder: (context, state) {
               return Center(
