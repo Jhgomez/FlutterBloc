@@ -54,6 +54,13 @@ class MyApp extends StatelessWidget {
             //     useMaterial3: true,
             //     primarySwatch: Colors.blue),
             debugShowCheckedModeBanner: false,
+            onGenerateRoute:(settings) {
+              switch (settings.name) {
+                case "/todoHome" : return MaterialPageRoute(
+                  builder: (contexti) => MyHomePage(title: '')
+                );
+              }
+            },
             home: const MyHomePage(title: 'Flutter Bloc Home Page'),
           );
         }
