@@ -6,7 +6,7 @@ import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
-import 'package:flutter_bloc_app/todo_pages/todo.dart';
+import 'package:flutter_bloc_app/todo_pages/todo_home.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             onGenerateRoute:(settings) {
               switch (settings.name) {
-                case "/todoHome" : return MaterialPageRoute(
-                  builder: (_) => const Todo()
+                case TodoHome.routeName : return MaterialPageRoute(
+                  builder: (_) => const TodoHome()
                 );
               }
             },
@@ -166,6 +166,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       '${state.counter}',
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
+                    const SizedBox(width: 48),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          TodoHome.routeName
+                        );
+                      },
+                      child: Text('Go to Todo')
+                      )
                   ],
                 ),
               );
