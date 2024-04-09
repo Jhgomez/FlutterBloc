@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 class Todo extends StatelessWidget {
+  static const routeName = '/todoHome';
+
   const Todo({super.key});
 
   @override
