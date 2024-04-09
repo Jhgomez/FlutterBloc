@@ -5,5 +5,9 @@ import 'package:flutter_bloc_app/todo_models/todo.dart';
 part 'todo_filter_state.dart';
 
 class TodoFilterCubit extends Cubit<TodoFilterState> {
-  TodoFilterCubit() : super(TodoFilterInitial());
+  TodoFilterCubit() : super(TodoFilterState.initial());
+
+  void changeFilter(Filter filter) {
+    emit(state.copyWith(filter: filter));
+  }
 }
