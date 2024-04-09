@@ -56,11 +56,12 @@ class MyApp extends StatelessWidget {
             //     primarySwatch: Colors.blue),
             debugShowCheckedModeBanner: false,
             onGenerateRoute:(settings) {
-              switch (settings.name) {
-                case TodoHome.routeName : return MaterialPageRoute(
+              return switch (settings.name) {
+                TodoHome.routeName => MaterialPageRoute(
                   builder: (_) => const TodoHome()
-                );
-              }
+                ),
+                _ => null
+              };
             },
             home: const MyHomePage(title: 'Flutter Bloc Home Page'),
           );
