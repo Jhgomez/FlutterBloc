@@ -6,6 +6,7 @@ import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
+import 'package:flutter_bloc_app/todo_pages/todo.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
             onGenerateRoute:(settings) {
               switch (settings.name) {
                 case "/todoHome" : return MaterialPageRoute(
-                  builder: (contexti) => MyHomePage(title: '')
+                  builder: (_) => const Todo()
                 );
               }
             },
