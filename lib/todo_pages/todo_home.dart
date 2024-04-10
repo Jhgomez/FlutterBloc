@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';
+import 'package:flutter_bloc_app/todo_pages/create_todo.dart';
+import 'package:flutter_bloc_app/todo_pages/todo_header.dart';
 
 class TodoHome extends StatelessWidget {
   static const routeName = '/todoHome';
@@ -24,9 +26,19 @@ class TodoHome extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          return Scaffold(
-            body: Center(
-              child: const Text('Todos'),
+          return const SafeArea(
+            child: Scaffold(
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  child: Column(
+                    children: [
+                      TodoHeader(),
+                      CreateTodo()
+                    ],
+                  ),
+                ),
+              ),
             ),
           );
         }
