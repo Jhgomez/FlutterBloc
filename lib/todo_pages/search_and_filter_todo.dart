@@ -41,6 +41,11 @@ import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';import 'pa
    return TextButton(
      onPressed: () {  
         context.read<TodoFilterCubit>().changeFilter(filter);
+        context.read<FilteredTodosCubit>().updateFilteredTodos(
+          context.read<TodoListCubit>().state.todos, 
+          context.read<TodoFilterCubit>().state.filter, 
+          context.read<TodoSearchCubit>().state.searchTerm
+        );
       }, 
       child: Text(
        switch (filter) {
