@@ -24,7 +24,7 @@ class FilteredTodosCubit extends Cubit<FilteredTodosState> {
       }
       
       if (searchTerm.isNotEmpty) {
-        filteredTodos = filteredTodos.where((todo) => todo.desc.contains(searchTerm)).toList();
+        filteredTodos = filteredTodos.where((todo) => todo.desc.toLowerCase().contains(searchTerm.toLowerCase())).toList();
       }
 
       emit(state.copyWith(todos: filteredTodos));
