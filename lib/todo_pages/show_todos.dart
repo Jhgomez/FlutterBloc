@@ -13,17 +13,39 @@ class TodoList extends StatelessWidget {
       primary: false,
       shrinkWrap: true,
       itemBuilder: ((context, index) {
-        return Text(
-            todos[index].desc,
-            style: TextStyle(fontSize: 20)
+        return Dismissible(
+            key: ValueKey(todos[index].id),
+            background: showBackground(0),
+            secondaryBackground: showBackground(1),
+            child: Text(
+              todos[index].desc,
+              style: const TextStyle(fontSize: 20)
+            ),
+            onDismissed: (todo) {
+
+            },
           );
         }
       ),
       separatorBuilder: ((context, index) {
-        return Divider(color: Colors.grey);
+        return const Divider(color: Colors.grey);
        }
       ),
       itemCount: todos.length
     );
+  }
+
+  Widget showBackground(int direction) {
+    return Container(
+      margin: const EdgeInsets.all(4),
+      padding: const EdgeInsets.symmetric(10),
+      color: Colors.red,
+      alignment: direction == 0 ? Alignment.centerLeft : Alignment.centerRight,
+      child: const Icon(
+        Icons.delete,
+        size: 30,
+        color: Colors.white,
+      ),
+    )
   }
 }
