@@ -6,7 +6,7 @@ Uuid uuid = const Uuid();
 
 enum Filter {
   all,
-  pending,
+  active,
   comopleted
 }
 
