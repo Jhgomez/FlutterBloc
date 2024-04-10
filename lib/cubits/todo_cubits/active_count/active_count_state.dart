@@ -5,10 +5,6 @@ class ActiveCountState extends Equatable {
   final int activeCount;
   const ActiveCountState({required this.activeCount});
 
-  factory ActiveCountState.initial() {
-    return const ActiveCountState(activeCount: 0);
-  }
-
   @override
   List<Object> get props => [activeCount];
 
