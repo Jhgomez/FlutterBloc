@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_app/cubits/todo_cubits/filtered_todos/filtered_todos_cubit.dart';
 import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';
-import 'package:flutter_bloc_app/todo_models/todo.dart';
 
 class CreateTodo extends StatefulWidget {
   const CreateTodo({super.key});
