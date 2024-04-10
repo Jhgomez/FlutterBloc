@@ -23,6 +23,9 @@ class TodoList extends StatelessWidget {
               context.read<TodoListCubit>().removeTodo(todos[index]);
               context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
             },
+            confirmDismiss: (_) {
+              return showConfirmation(context);
+            },
           );
         }
       ),
@@ -45,6 +48,29 @@ class TodoList extends StatelessWidget {
         size: 30,
         color: Colors.white,
       ),
+    );
+  }
+
+  Future<bool?> showConfirmation(BuildContext context) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Are you sure?'),
+          content: const Text('Do you really want to delete?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('No')
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Yes')
+            )
+          ]
+        );
+      }
     );
   }
 }
