@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';
+import 'package:flutter_bloc_app/todo_models/todo.dart';
 
-
-
-import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';import 'package:flutter_bloc_app/todo_models/todo.dart';class SearchAndFilterTodo extends StatelessWidget {
+class SearchAndFilterTodo extends StatelessWidget {
   const SearchAndFilterTodo({super.key});
 
   @override
@@ -18,13 +18,14 @@ import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';import 'pa
             prefixIcon: Icon(Icons.search)
           ),
           onChanged: (term) {
-            if (term.isEmpty) return;
+            context.read<TodoSearchCubit>().setSearchItem(term);
             List<Todo> todos = context.read<TodoListCubit>().state.todos;
             Filter filter = context.read<TodoFilterCubit>().state.filter;
-            context.read<FilteredTodosCubit>().updateFilteredTodos(todos, filter, term);
+            String searchTerm = context.read<TodoSearchCubit>().state.searchTerm;
+            context.read<FilteredTodosCubit>().updateFilteredTodos(todos, filter, searchTerm);
           },
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
