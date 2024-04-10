@@ -63,6 +63,7 @@ class _TodoItemState extends State<TodoItem> {
       value: widget.todo.completed,
       onChanged: (_) {
         context.read<TodoListCubit>().toggleTodo(widget.todo.id);
+        context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
         context.read<FilteredTodosCubit>().updateFilteredTodos(
           context.read<TodoListCubit>().state.todos, 
           context.read<TodoFilterCubit>().state.filter, 
