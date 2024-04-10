@@ -20,7 +20,7 @@ class TodoList extends StatelessWidget {
             secondaryBackground: showBackground(1),
             child: TodoItem(todo: todos[index]),
             onDismissed: (_) {
-              context.read<TodoListCubit>().removeTodo(todos[index].id);
+              context.read<TodoListCubit>().removeTodo(todos[index]);
               context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
             },
           );
