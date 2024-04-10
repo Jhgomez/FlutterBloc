@@ -10,4 +10,10 @@ class TodoFilterCubit extends Cubit<TodoFilterState> {
   void changeFilter(Filter filter) {
     emit(state.copyWith(filter: filter));
   }
+
+  @override
+  Future<void> close() {
+    print('This method is used if we need to dispose something in the cubit when cubit ');
+    return super.close();
+  }
 }
