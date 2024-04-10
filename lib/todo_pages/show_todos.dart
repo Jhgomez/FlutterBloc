@@ -71,7 +71,7 @@ class _TodoItemState extends State<TodoItem> {
         );
       },
       title: Text(widget.todo.desc),
-      subtitle: const Text('Subtitle'),
+      // subtitle: const Text('Subtitle'),
       activeColor: Colors.blue,
     );
   }
