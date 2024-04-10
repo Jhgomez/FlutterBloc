@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';
 import 'package:flutter_bloc_app/todo_pages/create_todo.dart';
 import 'package:flutter_bloc_app/todo_pages/search_and_filter_todo.dart';
+import 'package:flutter_bloc_app/todo_pages/show_todos.dart';
 import 'package:flutter_bloc_app/todo_pages/todo_header.dart';
 
 class TodoHome extends StatelessWidget {
@@ -37,7 +38,8 @@ class TodoHome extends StatelessWidget {
                       TodoHeader(),
                       CreateTodo(),
                       SizedBox(height: 20),
-                      SearchAndFilterTodo()
+                      SearchAndFilterTodo(),
+                      TodoList()
                     ],
                   ),
                 ),
