@@ -21,7 +21,7 @@ class TodoList extends StatelessWidget {
             child: TodoItem(todo: todos[index]),
             onDismissed: (_) {
               context.read<TodoListCubit>().removeTodo(todos[index]);
-              context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
+              // context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
             },
             confirmDismiss: (_) {
               return showConfirmation(context);
@@ -104,7 +104,7 @@ class _TodoItemState extends State<TodoItem> {
       value: widget.todo.completed,
       onChanged: (_) {
         rootContext.read<TodoListCubit>().toggleTodo(widget.todo.id);
-        rootContext.read<ActiveCountCubit>().updateActiveCount(rootContext.read<TodoListCubit>().state.todos);
+        // rootContext.read<ActiveCountCubit>().updateActiveCount(rootContext.read<TodoListCubit>().state.todos);
         rootContext.read<FilteredTodosCubit>().updateFilteredTodos(
           rootContext.read<TodoListCubit>().state.todos, 
           rootContext.read<TodoFilterCubit>().state.filter, 

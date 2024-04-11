@@ -32,7 +32,7 @@ class _CreateTodoState extends State<CreateTodo> {
       onSubmitted: (desc) {
         if (desc.isEmpty) return;
         context.read<TodoListCubit>().addTodo(desc);
-        context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
+        // context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
         newTodoController.clear();
         } ,
     );
