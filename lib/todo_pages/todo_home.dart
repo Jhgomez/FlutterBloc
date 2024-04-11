@@ -28,18 +28,18 @@ class TodoHome extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          return const SafeArea(
+          return SafeArea(
             child: Scaffold(
               body: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                   child: Column(
                     children: [
-                      TodoHeader(),
-                      CreateTodo(),
-                      SizedBox(height: 20),
+                      const TodoHeader(),
+                      const CreateTodo(),
+                      const SizedBox(height: 20),
                       SearchAndFilterTodo(),
-                      TodoList()
+                      const TodoList()
                     ],
                   ),
                 ),

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';
 import 'package:flutter_bloc_app/todo_models/todo.dart';
+import 'package:flutter_bloc_app/utils/debounce.dart';
 
 class SearchAndFilterTodo extends StatelessWidget {
-  const SearchAndFilterTodo({super.key});
+  SearchAndFilterTodo({super.key});
+
+  late final Debounce _debounce = Debounce(milliseconds: 600);
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +21,13 @@ class SearchAndFilterTodo extends StatelessWidget {
             prefixIcon: Icon(Icons.search)
           ),
           onChanged: (term) {
-            context.read<TodoSearchCubit>().setSearchItem(term);
-            List<Todo> todos = context.read<TodoListCubit>().state.todos;
-            Filter filter = context.read<TodoFilterCubit>().state.filter;
-            String searchTerm = context.read<TodoSearchCubit>().state.searchTerm;
-            context.read<FilteredTodosCubit>().updateFilteredTodos(todos, filter, searchTerm);
+            _debounce.run(() {
+              context.read<TodoSearchCubit>().setSearchItem(term);
+              List<Todo> todos = context.read<TodoListCubit>().state.todos;
+              Filter filter = context.read<TodoFilterCubit>().state.filter;
+              String searchTerm = context.read<TodoSearchCubit>().state.searchTerm;
+              context.read<FilteredTodosCubit>().updateFilteredTodos(todos, filter, searchTerm);
+             });
           },
         ),
         const SizedBox(height: 10),
