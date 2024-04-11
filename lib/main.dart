@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/bloc_listener_todo/todo_home.dart';
+import 'package:flutter_bloc_app/bloc_listener_todo_bloc/todo_home.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
@@ -73,6 +74,9 @@ class MyApp extends StatelessWidget {
                 ),
                 ListenerTodoHome.routeName => MaterialPageRoute(
                   builder: (_) => const ListenerTodoHome()
+                ),
+                ListenerTodoHomeBloc.routeName => MaterialPageRoute(
+                  builder: (_) => const ListenerTodoHomeBloc()
                 ),
                 _ => null
               };
