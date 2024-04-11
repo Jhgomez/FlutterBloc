@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_app/bloc_listener_todo/todo_home.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
@@ -69,6 +70,9 @@ class MyApp extends StatelessWidget {
               return switch (settings.name) {
                 TodoHome.routeName => MaterialPageRoute(
                   builder: (_) => const TodoHome()
+                ),
+                ListenerTodoHome.routeName => MaterialPageRoute(
+                  builder: (_) => const ListenerTodoHome()
                 ),
                 _ => null
               };
@@ -185,8 +189,17 @@ class _MyHomePageState extends State<MyHomePage> {
                           TodoHome.routeName
                         );
                       },
-                      child: Text('Go to Todo')
-                      )
+                      child: const Text('Go to Todo')
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ListenerTodoHome.routeName
+                        );
+                      },
+                      child: const Text('Go to Todo with bloc listener')
+                    )
                   ],
                 ),
               );
