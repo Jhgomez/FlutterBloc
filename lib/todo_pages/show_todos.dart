@@ -84,20 +84,84 @@ class TodoItem extends StatefulWidget {
 }
 
 class _TodoItemState extends State<TodoItem> {
+  late TextEditingController editTodo;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    editTodo = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    editTodo.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext rootContext) {
     return CheckboxListTile.adaptive(
       value: widget.todo.completed,
       onChanged: (_) {
-        context.read<TodoListCubit>().toggleTodo(widget.todo.id);
-        context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
-        context.read<FilteredTodosCubit>().updateFilteredTodos(
-          context.read<TodoListCubit>().state.todos, 
-          context.read<TodoFilterCubit>().state.filter, 
-          context.read<TodoSearchCubit>().state.searchTerm
+        rootContext.read<TodoListCubit>().toggleTodo(widget.todo.id);
+        rootContext.read<ActiveCountCubit>().updateActiveCount(rootContext.read<TodoListCubit>().state.todos);
+        rootContext.read<FilteredTodosCubit>().updateFilteredTodos(
+          rootContext.read<TodoListCubit>().state.todos, 
+          rootContext.read<TodoFilterCubit>().state.filter, 
+          rootContext.read<TodoSearchCubit>().state.searchTerm
         );
       },
       title: Text(widget.todo.desc),
+      secondary: IconButton(
+        icon: const Icon(Icons.edit),
+        onPressed: () {
+          showDialog(
+            context: rootContext,
+            builder: (context) {
+              bool _error = false;
+              editTodo.text = widget.todo.desc;
+
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return AlertDialog(
+                    title: const Text('Edit Todo'),
+                    content: TextField(
+                      controller: editTodo,
+                      autofocus: true,
+                      decoration: InputDecoration(errorText: _error ? 'Value cannot be empty' : null)
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Cancel')
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _error = editTodo.text.isEmpty;
+                          });
+                          if (!_error) {
+                            rootContext.read<TodoListCubit>().editTodo(widget.todo.id, editTodo.text);
+                            rootContext.read<FilteredTodosCubit>().updateFilteredTodos(
+                              rootContext.read<TodoListCubit>().state.todos,
+                              rootContext.read<TodoFilterCubit>().state.filter,
+                              rootContext.read<TodoSearchCubit>().state.searchTerm
+                            );
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: const Text('Edit')
+                      )
+                    ],
+                  );
+                }
+              );
+            }
+          );
+        }
+      ),
       // subtitle: const Text('Subtitle'),
       activeColor: Colors.blue,
     );
