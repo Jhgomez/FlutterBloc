@@ -203,6 +203,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         );
                       },
                       child: const Text('Go to Todo with bloc listener')
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ListenerTodoHomeBloc.routeName
+                        );
+                      },
+                      child: const Text('Go to Todo with bloc listener and bloc')
                     )
                   ],
                 ),
