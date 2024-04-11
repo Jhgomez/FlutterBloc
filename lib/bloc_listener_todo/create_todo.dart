@@ -22,7 +22,7 @@ class _CreateTodoState extends State<CreateTodo> {
   Widget build(BuildContext context) {
     return TextField(
       controller: newTodoController,
-      decoration: InputDecoration(labelText: 'What to do?'),
+      decoration: const InputDecoration(labelText: 'What to do?'),
       onChanged: (term) {
         // if (term.isEmpty) return;
         // List<Todo> todos = context.read<TodoListCubit>().state.todos;

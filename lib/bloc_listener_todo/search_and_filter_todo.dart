@@ -23,10 +23,6 @@ class SearchAndFilterTodo extends StatelessWidget {
           onChanged: (term) {
             _debounce.run(() {
               context.read<TodoSearchCubit>().setSearchItem(term);
-              List<Todo> todos = context.read<TodoListCubit>().state.todos;
-              Filter filter = context.read<TodoFilterCubit>().state.filter;
-              String searchTerm = context.read<TodoSearchCubit>().state.searchTerm;
-              context.read<FilteredTodosCubit>().updateFilteredTodos(todos, filter, searchTerm);
              });
           },
         ),
@@ -47,11 +43,6 @@ class SearchAndFilterTodo extends StatelessWidget {
    return TextButton(
      onPressed: () {  
         context.read<TodoFilterCubit>().changeFilter(filter);
-        context.read<FilteredTodosCubit>().updateFilteredTodos(
-          context.read<TodoListCubit>().state.todos, 
-          context.read<TodoFilterCubit>().state.filter, 
-          context.read<TodoSearchCubit>().state.searchTerm
-        );
       }, 
       child: Text(
        switch (filter) {
