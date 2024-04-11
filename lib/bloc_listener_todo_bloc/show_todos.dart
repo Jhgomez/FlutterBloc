@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_app/cubits/todo_cubits/todo_cubits.dart';
+import 'package:flutter_bloc_app/blocs/todo_blocs/filtered_todos/filtered_todos_bloc.dart';
+import 'package:flutter_bloc_app/blocs/todo_blocs/todo_bloc.dart';
 import 'package:flutter_bloc_app/todo_models/todo.dart';
 
 class TodoList extends StatelessWidget {
@@ -8,7 +9,7 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todos = context.watch<FilteredTodosCubit>().state.todos;
+    final todos = context.watch<FilteredTodosBloc>().state.todos;
     return ListView.separated(
         primary: false,
         shrinkWrap: true,
@@ -19,8 +20,7 @@ class TodoList extends StatelessWidget {
             secondaryBackground: showBackground(1),
             child: TodoItem(todo: todos[index]),
             onDismissed: (_) {
-              context.read<TodoListCubit>().removeTodo(todos[index]);
-              // context.read<ActiveCountCubit>().updateActiveCount(context.read<TodoListCubit>().state.todos);
+              context.read<TodoListBloc>().add(RemoveTodoEvent(todo: todos[index]));
             },
             confirmDismiss: (_) {
               return showConfirmation(context);
@@ -94,32 +94,38 @@ class _TodoItemState extends State<TodoItem> {
   Widget build(BuildContext rootContext) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<TodoListCubit, TodoListState>(listener: (context, state) {
-          rootContext.read<FilteredTodosCubit>().updateFilteredTodos(
-              state.todos,
-              rootContext.read<TodoFilterCubit>().state.filter,
-              rootContext.read<TodoSearchCubit>().state.searchTerm
-            );
+        BlocListener<TodoListBloc, TodoListState>(listener: (context, state) {
+          rootContext.read<FilteredTodosBloc>().add(
+            UpdateFilteredListEvent(
+              todos : state.todos,
+              filter : rootContext.read<TodoFilterBloc>().state.filter,
+              searchTerm : rootContext.read<TodoSearchBloc>().state.searchTerm
+            )
+          );
         }),
-        BlocListener<TodoFilterCubit, TodoFilterState>(listener: (context, state) {
-          rootContext.read<FilteredTodosCubit>().updateFilteredTodos(
-              rootContext.read<TodoListCubit>().state.todos,
-              state.filter,
-              rootContext.read<TodoSearchCubit>().state.searchTerm
-            );
+        BlocListener<TodoFilterBloc, TodoFilterState>(listener: (context, state) {
+          rootContext.read<FilteredTodosBloc>().add(
+            UpdateFilteredListEvent(
+              todos: rootContext.read<TodoListBloc>().state.todos,
+              filter: state.filter,
+              searchTerm: rootContext.read<TodoSearchBloc>().state.searchTerm
+            )
+          );
         }),
-        BlocListener<TodoSearchCubit, TodoSearchState>(listener: (context, state) {
-          rootContext.read<FilteredTodosCubit>().updateFilteredTodos(
-              rootContext.read<TodoListCubit>().state.todos,
-              rootContext.read<TodoFilterCubit>().state.filter,
-              state.searchTerm
-            );
+        BlocListener<TodoSearchBloc, TodoSearchState>(listener: (context, state) {
+          rootContext.read<FilteredTodosBloc>().add(
+            UpdateFilteredListEvent(
+              todos: rootContext.read<TodoListBloc>().state.todos,
+              filter: rootContext.read<TodoFilterBloc>().state.filter,
+              searchTerm: state.searchTerm
+            )
+          );
         })
       ],
       child: CheckboxListTile.adaptive(
         value: widget.todo.completed,
         onChanged: (_) {
-          rootContext.read<TodoListCubit>().toggleTodo(widget.todo.id);
+          rootContext.read<TodoListBloc>().add(ToggleTodoEvent(todo: widget.todo));
         },
         title: Text(widget.todo.desc),
         secondary: IconButton(
@@ -153,23 +159,27 @@ class _TodoItemState extends State<TodoItem> {
                                 });
                                 if (!_error) {
                                   rootContext
-                                      .read<TodoListCubit>()
-                                      .editTodo(widget.todo.id, editTodo.text);
+                                      .read<TodoListBloc>()
+                                      .add(
+                                        EditTodoEvent(todo: widget.todo,desc: editTodo.text)
+                                      );
                                   rootContext
-                                      .read<FilteredTodosCubit>()
-                                      .updateFilteredTodos(
-                                          rootContext
-                                              .read<TodoListCubit>()
+                                      .read<FilteredTodosBloc>()
+                                      .add(
+                                        UpdateFilteredListEvent(
+                                          todos: rootContext
+                                              .read<TodoListBloc>()
                                               .state
                                               .todos,
-                                          rootContext
-                                              .read<TodoFilterCubit>()
+                                          filter: rootContext
+                                              .read<TodoFilterBloc>()
                                               .state
                                               .filter,
-                                          rootContext
-                                              .read<TodoSearchCubit>()
+                                          searchTerm: rootContext
+                                              .read<TodoSearchBloc>()
                                               .state
-                                              .searchTerm);
+                                              .searchTerm)  
+                                      );
                                   Navigator.pop(context);
                                 }
                               },
