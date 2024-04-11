@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_app/Blocs/todo_Blocs/todo_Bloc.dart';
-import 'package:flutter_bloc_app/Blocs/todo_Blocs/todo_search/todo_search_bloc.dart';
+import 'package:flutter_bloc_app/blocs/todo_blocs/todo_bloc.dart';
 import 'package:flutter_bloc_app/todo_models/todo.dart';
 import 'package:flutter_bloc_app/utils/debounce.dart';
 
