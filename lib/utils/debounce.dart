@@ -7,7 +7,7 @@ class Debounce {
 
   Debounce({this.milliseconds = 500});
 
-  late Timer? _timer;
+  Timer? _timer;
 
   void run(VoidCallback action) {
     if(_timer != null) {
