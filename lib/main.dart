@@ -34,7 +34,17 @@ class MyApp extends StatelessWidget {
         builder: (contextB) {
           return MaterialApp(
             title: 'Counter Cubit',
-            theme: contextB.watch<ThemeBloc>().state.colorTheme == ColorTheme.DARK ? ThemeData.dark() : ThemeData.light(),
+            theme: contextB.watch<ThemeBloc>().state.colorTheme == ColorTheme.DARK ? 
+              ThemeData(
+                brightness: Brightness.dark,
+                useMaterial3: false,
+                primarySwatch: Colors.blue
+              ) : 
+              ThemeData(
+                brightness: Brightness.light,
+                useMaterial3: false,
+                primarySwatch: Colors.blue
+              ),
             // ThemeData(
             //     // This is the theme of your application.
             //     //
