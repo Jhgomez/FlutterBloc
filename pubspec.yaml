@@ -36,12 +36,14 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6 
-  equatable: ^2.0.5
-  flutter_bloc: ^8.1.5
+  equatable: ^2.0.5 # this makes easy to compare objects
+  flutter_bloc: ^8.1.5 # in VScode you would use the following extensions "Dart data class generator" to generate methods like "copyWith", "toString"
   bloc: ^8.1.4
+  rxdart: ^0.27.7
   bloc_concurrency: ^0.2.5
   hydrated_bloc: ^9.1.5
   path_provider : ^2.1.2
+  uuid: ^3.0.5 # this helps generate a Unique id
 
 dev_dependencies:
   flutter_test:

@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_app/bloc_listener_todo/todo_home.dart';
+import 'package:flutter_bloc_app/bloc_listener_todo_bloc/todo_home.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
+import 'package:flutter_bloc_app/todo_pages/todo_home.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -33,7 +36,17 @@ class MyApp extends StatelessWidget {
         builder: (contextB) {
           return MaterialApp(
             title: 'Counter Cubit',
-            theme: contextB.watch<ThemeBloc>().state.colorTheme == ColorTheme.DARK ? ThemeData.dark() : ThemeData.light(),
+            theme: contextB.watch<ThemeBloc>().state.colorTheme == ColorTheme.DARK ? 
+              ThemeData(
+                brightness: Brightness.dark,
+                useMaterial3: false,
+                primarySwatch: Colors.blue
+              ) : 
+              ThemeData(
+                brightness: Brightness.light,
+                useMaterial3: false,
+                primarySwatch: Colors.blue
+              ),
             // ThemeData(
             //     // This is the theme of your application.
             //     //
@@ -54,6 +67,20 @@ class MyApp extends StatelessWidget {
             //     useMaterial3: true,
             //     primarySwatch: Colors.blue),
             debugShowCheckedModeBanner: false,
+            onGenerateRoute:(settings) {
+              return switch (settings.name) {
+                TodoHome.routeName => MaterialPageRoute(
+                  builder: (_) => const TodoHome()
+                ),
+                ListenerTodoHome.routeName => MaterialPageRoute(
+                  builder: (_) => const ListenerTodoHome()
+                ),
+                ListenerTodoHomeBloc.routeName => MaterialPageRoute(
+                  builder: (_) => const ListenerTodoHomeBloc()
+                ),
+                _ => null
+              };
+            },
             home: const MyHomePage(title: 'Flutter Bloc Home Page'),
           );
         }
@@ -158,6 +185,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       '${state.counter}',
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
+                    const SizedBox(width: 48),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          TodoHome.routeName
+                        );
+                      },
+                      child: const Text('Go to Todo')
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ListenerTodoHome.routeName
+                        );
+                      },
+                      child: const Text('Go to Todo with bloc listener')
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          ListenerTodoHomeBloc.routeName
+                        );
+                      },
+                      child: const Text('Go to Todo with bloc listener and bloc')
+                    )
                   ],
                 ),
               );
