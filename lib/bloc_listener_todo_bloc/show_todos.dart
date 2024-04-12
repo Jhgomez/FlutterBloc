@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_app/blocs/todo_blocs/filtered_todos/filtered_todos_bloc.dart';
 import 'package:flutter_bloc_app/blocs/todo_blocs/todo_bloc.dart';
 import 'package:flutter_bloc_app/todo_models/todo.dart';
 
@@ -10,7 +9,37 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodosBloc>().state.todos;
-    return ListView.separated(
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<TodoListBloc, TodoListState>(listener: (context, state) {
+          context.read<FilteredTodosBloc>().add(
+            UpdateFilteredListEvent(
+              todos : state.todos,
+              filter : context.read<TodoFilterBloc>().state.filter,
+              searchTerm : context.read<TodoSearchBloc>().state.searchTerm
+            )
+          );
+        }),
+        BlocListener<TodoFilterBloc, TodoFilterState>(listener: (context, state) {
+          context.read<FilteredTodosBloc>().add(
+            UpdateFilteredListEvent(
+              todos: context.read<TodoListBloc>().state.todos,
+              filter: state.filter,
+              searchTerm: context.read<TodoSearchBloc>().state.searchTerm
+            )
+          );
+        }),
+        BlocListener<TodoSearchBloc, TodoSearchState>(listener: (context, state) {
+          context.read<FilteredTodosBloc>().add(
+            UpdateFilteredListEvent(
+              todos: context.read<TodoListBloc>().state.todos,
+              filter: context.read<TodoFilterBloc>().state.filter,
+              searchTerm: state.searchTerm
+            )
+          );
+        })
+      ],
+      child: ListView.separated(
         primary: false,
         shrinkWrap: true,
         itemBuilder: ((context, index) {
@@ -30,7 +59,9 @@ class TodoList extends StatelessWidget {
         separatorBuilder: ((context, index) {
           return const Divider(color: Colors.grey);
         }),
-        itemCount: todos.length);
+        itemCount: todos.length
+      )
+    );
   }
 
   Widget showBackground(int direction) {
@@ -92,37 +123,7 @@ class _TodoItemState extends State<TodoItem> {
 
   @override
   Widget build(BuildContext rootContext) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<TodoListBloc, TodoListState>(listener: (context, state) {
-          rootContext.read<FilteredTodosBloc>().add(
-            UpdateFilteredListEvent(
-              todos : state.todos,
-              filter : rootContext.read<TodoFilterBloc>().state.filter,
-              searchTerm : rootContext.read<TodoSearchBloc>().state.searchTerm
-            )
-          );
-        }),
-        BlocListener<TodoFilterBloc, TodoFilterState>(listener: (context, state) {
-          rootContext.read<FilteredTodosBloc>().add(
-            UpdateFilteredListEvent(
-              todos: rootContext.read<TodoListBloc>().state.todos,
-              filter: state.filter,
-              searchTerm: rootContext.read<TodoSearchBloc>().state.searchTerm
-            )
-          );
-        }),
-        BlocListener<TodoSearchBloc, TodoSearchState>(listener: (context, state) {
-          rootContext.read<FilteredTodosBloc>().add(
-            UpdateFilteredListEvent(
-              todos: rootContext.read<TodoListBloc>().state.todos,
-              filter: rootContext.read<TodoFilterBloc>().state.filter,
-              searchTerm: state.searchTerm
-            )
-          );
-        })
-      ],
-      child: CheckboxListTile.adaptive(
+    return  CheckboxListTile.adaptive(
         value: widget.todo.completed,
         onChanged: (_) {
           rootContext.read<TodoListBloc>().add(ToggleTodoEvent(todo: widget.todo));
@@ -191,7 +192,6 @@ class _TodoItemState extends State<TodoItem> {
             }),
         // subtitle: const Text('Subtitle'),
         activeColor: Colors.blue,
-      ),
-    );
+      );
   }
 }
