@@ -39,6 +39,7 @@ dependencies:
   equatable: ^2.0.5 # this makes easy to compare objects
   flutter_bloc: ^8.1.5 # in VScode you would use the following extensions "Dart data class generator" to generate methods like "copyWith", "toString"
   bloc: ^8.1.4
+  rxdart: ^0.27.7
   bloc_concurrency: ^0.2.5
   hydrated_bloc: ^9.1.5
   path_provider : ^2.1.2
