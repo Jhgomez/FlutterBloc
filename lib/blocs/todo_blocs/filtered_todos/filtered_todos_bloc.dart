@@ -14,11 +14,11 @@ class FilteredTodosBloc extends Bloc<FilteredTodosEvent, FilteredTodosState> {
 
           switch (event.filter) {
             case Filter.all:
-              filteredTodos = todos;
+              filteredTodos = event.todos;
             case Filter.active:
-              filteredTodos = todos.where((todo) => !todo.completed).toList();
+              filteredTodos = event.todos.where((todo) => !todo.completed).toList();
             case Filter.comopleted:
-              filteredTodos = todos.where((todo) => todo.completed).toList();
+              filteredTodos = event.todos.where((todo) => todo.completed).toList();
           }
       
           if (event.searchTerm.isNotEmpty) {
