@@ -28,18 +28,18 @@ class ListenerTodoHomeBloc extends StatelessWidget {
       ],
       child: Builder(
         builder: (context) {
-          return SafeArea(
+          return const SafeArea(
             child: Scaffold(
               body: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                   child: Column(
                     children: [
-                      const TodoHeader(),
-                      const CreateTodo(),
-                      const SizedBox(height: 20),
+                      TodoHeader(),
+                      CreateTodo(),
+                      SizedBox(height: 20),
                       SearchAndFilterTodo(),
-                      const TodoList()
+                      TodoList()
                     ],
                   ),
                 ),
