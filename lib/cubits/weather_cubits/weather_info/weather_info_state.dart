@@ -7,7 +7,7 @@ class WeatherInfoState extends Equatable {
   const WeatherInfoState({required this.city});
 
   factory WeatherInfoState.initial() {
-    return WeatherInfoState(city: null);
+    return const WeatherInfoState(city: null);
   }
 
   @override
