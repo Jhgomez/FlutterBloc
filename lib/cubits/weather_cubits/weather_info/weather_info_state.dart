@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'current_city_cubit.dart';
+part of 'weather_info_cubit.dart';
 
-class CurrentCityState extends Equatable {
+class WeatherInfoState extends Equatable {
   final WeatherInfo? city;
 
-  const CurrentCityState({required this.city});
+  const WeatherInfoState({required this.city});
 
-  factory CurrentCityState.initial() {
-    return CurrentCityState(city: null);
+  factory WeatherInfoState.initial() {
+    return WeatherInfoState(city: null);
   }
 
   @override
@@ -16,10 +16,10 @@ class CurrentCityState extends Equatable {
   @override
   String toString() => 'CurrentCityState: $city';
 
-  CurrentCityState copyWith({
+  WeatherInfoState copyWith({
     WeatherInfo? city,
   }) {
-    return CurrentCityState(
+    return WeatherInfoState(
       city: city ?? this.city,
     );
   }
