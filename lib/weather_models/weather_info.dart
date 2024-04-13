@@ -2,7 +2,7 @@
 class WeatherInfo {
   final String city;
   final DateTime time;
-  final String temperature;
+  final double temperature;
   final String minTemperature;
   final String maxTemperature;
   final String icon;
