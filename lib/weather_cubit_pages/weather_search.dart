@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/weather_cubits/weather_info/weather_info_cubit.dart';
 
-class WeatherSearchState extends StatefulWidget {
+class WeatherSearch extends StatefulWidget {
   static const weatherSearchRoute = '/weatherSearch';
-  const WeatherSearchState({super.key});
+  const WeatherSearch({super.key});
 
   @override
-  State<WeatherSearchState> createState() => _WeatherSearchStateState();
+  State<WeatherSearch> createState() => _WeatherSearchStateState();
 }
 
-class _WeatherSearchStateState extends State<WeatherSearchState> {
+class _WeatherSearchStateState extends State<WeatherSearch> {
   final TextEditingController _search = TextEditingController();
 
   @override
