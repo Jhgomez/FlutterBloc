@@ -4,6 +4,8 @@ import 'package:flutter_bloc_app/cubits/weather_cubits/weather_info/weather_info
 import 'package:transparent_image/transparent_image.dart';
 
 class WeatherDisplay extends StatelessWidget {
+  static const String weatherAppRoute = '/weather';
+
   const WeatherDisplay({super.key});
   
   @override
