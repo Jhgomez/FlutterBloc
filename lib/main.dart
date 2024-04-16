@@ -79,6 +79,14 @@ class MyApp extends StatelessWidget {
                 ListenerTodoHomeBloc.routeName => MaterialPageRoute(
                   builder: (_) => const ListenerTodoHomeBloc()
                 ),
+                WeatherDisplay.weatherAppRoute => MaterialPageRoute(
+                  builder: (_) {
+                    return BlocProvider.value(
+                      value: contextB.read<ThemeBloc>(),
+                      child: const WeatherDisplay()
+                    );
+                  }
+                ),
                 _ => null
               };
             },
@@ -216,12 +224,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (contextRoute) {
-                           return BlocProvider.value(
-                            value: context.read<ThemeBloc>(),
-                            child: const WeatherDisplay()
-                          );
-                        }));
+                        Navigator.pushNamed(
+                          context,
+                          WeatherDisplay.weatherAppRoute
+                        );
                       },
                       child: const Text('Weather App'),
                     )
