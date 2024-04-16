@@ -23,12 +23,12 @@ class WeatherDisplay extends StatelessWidget {
                 actions: [
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.settings)
+                    icon: const Icon(Icons.search)
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.search)
-                  ),
+                    icon: const Icon(Icons.settings)
+                  )
                 ],
               ),
               body: Center(
