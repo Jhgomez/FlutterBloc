@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class WeatherInfo {
   final String city;
+  final String country;
   final DateTime time;
   final double temperature;
   final String minTemperature;
@@ -10,6 +11,7 @@ class WeatherInfo {
   
   WeatherInfo({
     required this.city,
+    required this.country,
     required this.time,
     required this.temperature,
     required this.minTemperature,
