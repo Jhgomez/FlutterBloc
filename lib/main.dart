@@ -6,10 +6,12 @@ import 'package:flutter_bloc_app/bloc_listener_todo_bloc/todo_home.dart';
 import 'package:flutter_bloc_app/blocs/counter/counter_bloc.dart';
 import 'package:flutter_bloc_app/blocs/theme/theme_bloc.dart';
 import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
+import 'package:flutter_bloc_app/cubits/weather_cubits/weather_info/weather_info_cubit.dart';
 import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
 import 'package:flutter_bloc_app/todo_pages/todo_home.dart';
 import 'package:flutter_bloc_app/weather_cubit_pages/weather_display.dart';
+import 'package:flutter_bloc_app/weather_cubit_pages/weather_search.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CounterCubit>(create: (context) => CounterCubit()),
-        BlocProvider<ThemeBloc>(create: (context) => ThemeBloc())
+        BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
+        BlocProvider<WeatherInfoCubit>(create: (context) => WeatherInfoCubit())
       ],
       child: Builder(
         builder: (contextB) {
@@ -83,7 +86,18 @@ class MyApp extends StatelessWidget {
                   builder: (_) {
                     return BlocProvider.value(
                       value: contextB.read<ThemeBloc>(),
-                      child: const WeatherDisplay()
+                      child: BlocProvider.value(
+                        value: contextB.read<WeatherInfoCubit>(),
+                        child: const WeatherDisplay(),
+                      )
+                    );
+                  }
+                ),
+                WeatherSearch.weatherSearchRoute => MaterialPageRoute(
+                  builder: (_) {
+                    return BlocProvider.value(
+                      value: contextB.read<WeatherInfoCubit>(),
+                      child: const WeatherSearch()
                     );
                   }
                 ),
