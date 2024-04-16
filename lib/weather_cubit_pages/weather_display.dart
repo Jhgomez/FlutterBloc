@@ -22,7 +22,9 @@ class WeatherDisplay extends StatelessWidget {
                 title: const Text('Weather'),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      
+                    },
                     icon: const Icon(Icons.search)
                   ),
                   IconButton(
@@ -39,12 +41,12 @@ class WeatherDisplay extends StatelessWidget {
                       '${city?.city}',
                       style: Theme.of(contextB).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold)
                     ),
-                    const SizedBox(height: 16),
+                    // const SizedBox(height: 16),
                     Text(
                       '${city?.time} (${city?.country})',
                       style: Theme.of(contextB).textTheme.bodyLarge
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 32),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -52,10 +54,15 @@ class WeatherDisplay extends StatelessWidget {
                           '${city?.temperature}',
                           style: Theme.of(contextB).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                         ),
+                        const SizedBox(width: 12,),
                         Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              Text(
+                                '${city?.maxTemperature}',
+                                style: Theme.of(contextB).textTheme.bodyLarge,
+                              ),
                               Text(
                                 '${city?.minTemperature}',
                                 style: Theme.of(contextB).textTheme.bodyLarge,
@@ -63,7 +70,9 @@ class WeatherDisplay extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 40),
+                      ],
+                    ),
+                    const SizedBox(height: 32),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -81,8 +90,6 @@ class WeatherDisplay extends StatelessWidget {
                             )
                           ],
                         )
-                      ],
-                    )
                   ]
                 )
               ),
