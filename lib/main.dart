@@ -9,6 +9,7 @@ import 'package:flutter_bloc_app/cubits/counter/counter_cubit.dart';
 import 'package:flutter_bloc_app/observer/app_bloc_observer.dart';
 import 'package:flutter_bloc_app/other_page.dart';
 import 'package:flutter_bloc_app/todo_pages/todo_home.dart';
+import 'package:flutter_bloc_app/weather_cubit_pages/weather_display.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -212,6 +213,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         );
                       },
                       child: const Text('Go to Todo with bloc listener and bloc')
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (contextRoute) {
+                           return BlocProvider.value(
+                            value: context.read<ThemeBloc>(),
+                            child: const WeatherDisplay()
+                          );
+                        }));
+                      },
+                      child: const Text('Weather App'),
                     )
                   ],
                 ),
