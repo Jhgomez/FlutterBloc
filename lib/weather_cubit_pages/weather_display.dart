@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/weather_cubits/weather_info/weather_info_cubit.dart';
+import 'package:flutter_bloc_app/weather_cubit_pages/weather_search.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class WeatherDisplay extends StatelessWidget {
@@ -10,11 +11,7 @@ class WeatherDisplay extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => WeatherInfoCubit(),
-      child: Builder(
-        builder: (contextB) {
-          final city = contextB.watch<WeatherInfoCubit>().state.city;
+    final city = context.watch<WeatherInfoCubit>().state.city;
 
           return SafeArea(
             child: Scaffold(
@@ -23,7 +20,7 @@ class WeatherDisplay extends StatelessWidget {
                 actions: [
                   IconButton(
                     onPressed: () {
-                      
+                      Navigator.of(context).pushNamed(WeatherSearch.weatherSearchRoute);
                     },
                     icon: const Icon(Icons.search)
                   ),
@@ -39,12 +36,12 @@ class WeatherDisplay extends StatelessWidget {
                   children: [
                     Text(
                       '${city?.city}',
-                      style: Theme.of(contextB).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold)
+                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold)
                     ),
                     // const SizedBox(height: 16),
                     Text(
                       '${city?.time} (${city?.country})',
-                      style: Theme.of(contextB).textTheme.bodyLarge
+                      style: Theme.of(context).textTheme.bodyLarge
                     ),
                     const SizedBox(height: 32),
                     Row(
@@ -52,7 +49,7 @@ class WeatherDisplay extends StatelessWidget {
                       children: [
                         Text(
                           '${city?.temperature}',
-                          style: Theme.of(contextB).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(width: 12,),
                         Center(
@@ -61,11 +58,11 @@ class WeatherDisplay extends StatelessWidget {
                             children: [
                               Text(
                                 '${city?.maxTemperature}',
-                                style: Theme.of(contextB).textTheme.bodyLarge,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               Text(
                                 '${city?.minTemperature}',
-                                style: Theme.of(contextB).textTheme.bodyLarge,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               )
                             ],
                           ),
@@ -86,7 +83,7 @@ class WeatherDisplay extends StatelessWidget {
                             const SizedBox(width: 24),
                             Text(
                               '${city?.condition}',
-                              style: Theme.of(contextB).textTheme.titleLarge
+                              style: Theme.of(context).textTheme.titleLarge
                             )
                           ],
                         )
@@ -95,8 +92,5 @@ class WeatherDisplay extends StatelessWidget {
               ),
              ),
           );
-        },
-      )
-    );
   }
 }
