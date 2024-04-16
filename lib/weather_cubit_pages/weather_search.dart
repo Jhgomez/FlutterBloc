@@ -27,23 +27,26 @@ class _WeatherSearchStateState extends State<WeatherSearch> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              title: 
-              
-              const Center(child: Text('Search')),
+              title: const Text('Search'),
             ),
             body: Column(
               children: [
-                TextField(
-                  controller: _search,
-                  autofocus: true,
-                  decoration: const InputDecoration(
+                Padding(
+                  padding: EdgeInsets.fromLTRB(24, 32, 24, 0),
+                  child: TextField(
+                    controller: _search,
+                    autofocus: true,
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(),
                       border: OutlineInputBorder(),
                       labelText: 'City Name',
                       hintText: 'more than 2 characters',
-                      icon: Icon(Icons.search)),
-                  onSubmitted: (value) {
-                    if (value.length >= 2) {}
-                  },
+                      prefixIcon: Icon(Icons.search)
+                    ),
+                    onSubmitted: (value) {
+                      if (value.length >= 2) {}
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 8,
