@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_app/cubits/weather_cubits/weather_info/weather_info_cubit.dart';
 import 'package:flutter_bloc_app/weather_cubit_pages/weather_search.dart';
+import 'package:flutter_bloc_app/weather_cubit_pages/weather_settings.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class WeatherDisplay extends StatelessWidget {
@@ -25,7 +26,9 @@ class WeatherDisplay extends StatelessWidget {
                     icon: const Icon(Icons.search)
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(Settings.settingsRoute);
+                    },
                     icon: const Icon(Icons.settings)
                   )
                 ],
