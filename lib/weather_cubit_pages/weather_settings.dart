@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
+  static const String settingsRoute = '/settings';
   const Settings({super.key});
 
   @override
