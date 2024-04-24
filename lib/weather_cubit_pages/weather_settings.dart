@@ -15,13 +15,16 @@ class _SettingsState extends State<Settings> {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: SwitchListTile(
-        value: true,
-        onChanged: (value) {
-          
-        },
-        title: const Text('Temperature Unit'),
-        subtitle: const Text('Celsius/Fahreinheit (Default Celsius)'),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 24, 0),
+        child: SwitchListTile(
+          value: true,
+          onChanged: (value) {
+            
+          },
+          title: const Text('Temperature Unit'),
+          subtitle: const Text('Celsius/Fahreinheit (Default Celsius)'),
+        ),
       ),
     );
   }
