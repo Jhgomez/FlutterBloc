@@ -12,6 +12,7 @@ import 'package:flutter_bloc_app/other_page.dart';
 import 'package:flutter_bloc_app/todo_pages/todo_home.dart';
 import 'package:flutter_bloc_app/weather_cubit_pages/weather_display.dart';
 import 'package:flutter_bloc_app/weather_cubit_pages/weather_search.dart';
+import 'package:flutter_bloc_app/weather_cubit_pages/weather_settings.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -99,6 +100,11 @@ class MyApp extends StatelessWidget {
                       value: contextB.read<WeatherInfoCubit>(),
                       child: const WeatherSearch()
                     );
+                  }
+                ),
+                Settings.settingsRoute => MaterialPageRoute(
+                  builder: (_) {
+                    return const Settings();
                   }
                 ),
                 _ => null
